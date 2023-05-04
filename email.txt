@@ -1,1 +1,3 @@
-YOUR_EMAIL_HERE
+yong.kim020901@gmail.com
+
+all changes have been recorded in changelog.txt

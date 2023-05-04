@@ -1,0 +1,21 @@
+BUG 1 @ [index.css] .RampInputSelect--dropdown-container-opened 
+    + added @ line 107 - position : absolute 
+    
+BUG 2 @ [InputCheckbox/index.tsx]
+    - removed line 20 to 26 // input was set to display : none, pretty much useless
+    + added @ line 19 - onClick={() => onChange(!checked)}
+    
+BUG 3 @ [App.tsx]
+    + added @ line 68 to 71 // an else if statment that checks the newValue's first and last name if it is "All Employees" if so fetch all transaction. The problem is that all employees does not have an ID and the function loadTransactionsByEmployee fetches data based on ID. 
+
+BUG 4 @ [usePaginatedTransaction.ts]
+    + modified @ line 28 // from data: response.data to data: [...previousResponse.data, ...response.data] the reason it was not loading properly was because the previous response was not added onto the new data for transaction
+
+BUG 5 @ [InputSelect/index.tsx]
+    + modifed @ line 97 // from isLoading to !items if items are empty that means employees have not been fetched or is currently null during re-renders the list of employees has not changed to null, the cause for the loading... is because the loading variable is tied to a fetch for employee transaction.
+
+BUG 6 @ [App.tsx]
+    + modified @ line 85 from transaction to paginatedTransactions && paginatedTransactions.nextPage transaction would check current transactions instead of what can come next. paginatedtransaction will turn null if the filter is set to an employee additionally, paginatedtransaction.nextPage will be null if there is no longer data to load.
+    
+BUG 7 @ [Transactions/index.tsx]
+    + added @ line 19 - clearCacheByEndpoint(["paginatedTransactions", "transactionsByEmployee"]); cleared previous transaction cache which was memoized in App.tsx, force re render of new filter input.
